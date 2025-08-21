@@ -1,0 +1,8 @@
+.direnv
+.idea
+*.pid
+target
+
+.classpath
+.project
+.settings
