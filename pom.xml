@@ -10,6 +10,14 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Convenia API Java - GitHub Packages</name>
+            <url>https://maven.pkg.github.com/atricore/convenia-api-java</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
