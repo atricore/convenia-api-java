@@ -58,7 +58,7 @@ jobs:
     - name: Prepare release artifacts
       run: |
         mkdir -p release-artifacts
-        cp target/connector-convenia-api-client-*.jar release-artifacts/
+        cp target/convenia-api-client-*.jar release-artifacts/
         cp README.md release-artifacts/
         cp LICENSE release-artifacts/
         if [ -d "examples" ]; then
@@ -82,20 +82,13 @@ jobs:
         draft: false
         prerelease: false
         body: |
-          ## MidPoint convenia-api-client Connector ${{ steps.version.outputs.version }}
-          
-          ### Installation
-          1. Download the `connector-convenia-api-client-*.jar` file
-          2. Copy it to your MidPoint's `icf-connectors` directory
-          3. Restart MidPoint
+          ## Convenia HR API Client ${{ steps.version.outputs.version }}
           
           ### Compatibility
-          - MidPoint 4.8+
           - Java 11, 17, 21
-          - Google Cloud SDK v26.34.0
           
           ### Files in this release
-          - `connector-convenia-api-client-*.jar` - Main connector JAR file
+          - `convenia-api-client-*.jar` - Main connector JAR file
           - `README.md` - Documentation
           - `LICENSE` - License information
           - `*.xml` - Configuration examples (if available)

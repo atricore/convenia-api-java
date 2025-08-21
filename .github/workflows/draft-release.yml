@@ -79,11 +79,6 @@ jobs:
           
           ⚠️ **This is a draft release for testing purposes**
           
-          ### Installation
-          1. Download the `convenia-api-client-*.jar` file
-          2. Copy it to your MidPoint's `icf-connectors` directory
-          3. Restart MidPoint
-          
           ### Compatibility
           - Java 11, 17, 21
           
