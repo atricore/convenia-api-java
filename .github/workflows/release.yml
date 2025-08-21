@@ -1,5 +1,4 @@
 name: Release
-
 on:
   push:
     tags:
@@ -10,10 +9,13 @@ on:
         description: 'Release version (e.g., v1.3.0)'
         required: true
         type: string
-
 jobs:
   release:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write  # for creating releases
+      packages: write  # for publishing to GitHub Packages
     
     steps:
     - name: Checkout code
@@ -52,8 +54,10 @@ jobs:
     - name: Run tests
       run: mvn clean test
       
-    - name: Build connector JAR
-      run: mvn clean package -DskipTests
+    - name: Build and publish to GitHub Packages
+      run: mvn clean deploy -DskipTests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Prepare release artifacts
       run: |
@@ -73,7 +77,7 @@ jobs:
         done
         
     - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+      uses: softprofs/action-gh-release@v1
       with:
         tag_name: ${{ steps.version.outputs.version }}
         name: Convenia HR API Client ${{ steps.version.outputs.version }}
@@ -83,6 +87,39 @@ jobs:
         prerelease: false
         body: |
           ## Convenia HR API Client ${{ steps.version.outputs.version }}
+          
+          ### Installation
+          
+          #### Option 1: Download JAR
+          Download the `convenia-api-client-*.jar` file from the assets below.
+          
+          #### Option 2: Maven Dependency
+          Add to your `pom.xml`:
+          ```xml
+          <repositories>
+              <repository>
+                  <id>github</id>
+                  <url>https://maven.pkg.github.com/atricore/convenia-api-java</url>
+              </repository>
+          </repositories>
+          
+          <dependency>
+              <groupId>com.atricore.iam.convenia.api</groupId>
+              <artifactId>convenia-api-client</artifactId>
+              <version>${{ steps.version.outputs.version }}</version>
+          </dependency>
+          ```
+          
+          Note: GitHub Packages requires authentication. Add your GitHub credentials to `~/.m2/settings.xml`:
+          ```xml
+          <servers>
+              <server>
+                  <id>github</id>
+                  <username>YOUR_GITHUB_USERNAME</username>
+                  <password>YOUR_PERSONAL_ACCESS_TOKEN</password>
+              </server>
+          </servers>
+          ```
           
           ### Compatibility
           - Java 11, 17, 21
