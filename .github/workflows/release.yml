@@ -76,7 +76,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.version.outputs.version }}
-        name: MidPoint convenia-api-client Connector ${{ steps.version.outputs.version }}
+        name: Convenia HR API Client ${{ steps.version.outputs.version }}
         files: release-artifacts/*
         generate_release_notes: true
         draft: false
