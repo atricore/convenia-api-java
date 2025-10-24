@@ -18,6 +18,16 @@ This library provides a simple interface to interact with Convenia's REST API, a
 - JDK 11 or higher
 - Maven 3.x
 
+## Authentication & Permissions
+
+This client uses token-based authentication to access the Convenia API. **Important**: The permissions assigned to your token in Convenia directly impact which fields are available in the API responses. 
+
+- Tokens with limited permissions may receive responses with fewer fields populated
+- Administrative tokens typically have access to all available fields
+- Field availability varies based on your organization's Convenia configuration and the specific permissions granted to your API token
+
+Ensure your token has the appropriate permissions for the data you need to access.
+
 ## Key Features
 
 - **Employee Management**: Get employees by ID, email, or paginated lists

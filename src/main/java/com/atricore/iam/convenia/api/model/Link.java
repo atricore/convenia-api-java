@@ -4,6 +4,7 @@ public class Link {
     private String url;
     private String label;
     private boolean active;
+    private Integer page;
 
     // Getters and setters
 
@@ -29,5 +30,13 @@ public class Link {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 }
